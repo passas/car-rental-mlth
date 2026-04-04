@@ -1,0 +1,5 @@
+---
+- name: PostgreSQL - Docker - Deploy
+  hosts: db
+  roles:
+    - psql-docker-deploy

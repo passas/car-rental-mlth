@@ -1,0 +1,24 @@
+---
+- name: PostgreSQL - User - Schema
+  ansible.builtin.include_tasks: user/schema.yml
+  when: psql.files.user.schema is defined and psql.files.user.schema | length() > 0
+
+- name: PostgreSQL - User - Store Procedures
+  ansible.builtin.include_tasks: user/procedure.yml
+  when: psql.files.user.procedure is defined and psql.files.user.procedure | length() > 0
+
+- name: PostgreSQL - User - DDLs
+  ansible.builtin.include_tasks: user/ddl.yml
+  when: psql.files.user.ddl is defined and psql.files.user.ddl | length() > 0
+
+- name: PostgreSQL - User - Add Admin
+  ansible.builtin.include_tasks: add-user-role-admin.yml
+  when: psql.user.admin is defined and psql.user.admin | length() > 0
+
+- name: PostgreSQL - User - Add Manager
+  ansible.builtin.include_tasks: add-user-role-manager.yml
+  when: psql.user.manager is defined and psql.user.manager | length() > 0
+
+- name: PostgreSQL - User - DDL User System
+  ansible.builtin.include_tasks: add-user-role-system.yml
+  when: psql.user.system is defined and psql.user.system | length() > 0

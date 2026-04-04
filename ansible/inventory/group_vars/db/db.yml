@@ -1,0 +1,54 @@
+psql:
+  host:
+    port: 5432
+  docker:
+    image: "postgres:18.1"
+    container: "car-rental-db-container"
+    volume: "car-rental-db-volume"
+    data: "/var/lib/postgresql"
+    port: 5432
+  db:
+    name: "car-rental"
+    user: "admin"
+    password: "{{ db_vault.psql.db.password }}"
+  user:
+    admin:
+      - username: "admin"
+        password: "admin"
+    manager:
+      - username: "manager"
+        password: "manager"
+      - username: "manager_y"
+        password: "manager_y"
+    system:
+      - username: "system"
+        password: "system"
+  files:
+    user:
+      schema:
+        - "_user.sql"
+        - "role.sql"
+        - "user_role.sql"
+      ddl:
+        - "ddl_role.sql"
+      procedure:
+        - "sp_create_user_admin_role.sql"
+        - "sp_create_user_manager_role.sql"
+        - "sp_create_user_system_role.sql"
+    inventory:
+      schema:
+        - "fuel.sql"
+        - "brand.sql"
+        - "brand_model.sql"
+        - "car.sql"
+      ddl:
+        - "ddl_fuel.sql"
+        - "ddl_brand.sql"
+        - "ddl_carmodel_audi.sql"
+        - "ddl_carmodel_citroen.sql"
+        - "ddl_carmodel_dacia.sql"
+        - "ddl_carmodel_opel.sql"
+        - "ddl_carmodel_peugeot.sql"
+        - "ddl_carmodel_renault.sql"
+        - "ddl_carmodel_volkswagen.sql"
+        - "ddl_car.sql"

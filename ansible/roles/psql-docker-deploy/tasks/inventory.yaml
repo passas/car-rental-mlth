@@ -1,0 +1,12 @@
+---
+- name: PostgreSQL - Inventory - Schema
+  ansible.builtin.include_tasks: inventory/schema.yml
+  when: psql.files.inventory.schema is defined and psql.files.inventory.schema | length() > 0
+
+- name: PostgreSQL - Inventory - Store Procedures
+  ansible.builtin.include_tasks: inventory/procedure.yml
+  when: psql.files.inventory.procedure is defined and psql.files.inventory.procedure | length() > 0
+
+- name: PostgreSQL - Inventory -  DDLs
+  ansible.builtin.include_tasks: inventory/ddl.yml
+  when: psql.files.inventory.ddl is defined and psql.files.inventory.ddl | length() > 0

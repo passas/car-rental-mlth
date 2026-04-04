@@ -1,0 +1,15 @@
+---
+- name: PSQL DOCKER CONTAINER
+  community.docker.docker_container:
+    name: "{{ psql.docker.container }}"
+    image: "{{ psql.docker.image }}"
+    state: started
+    restart_policy: unless-stopped
+    published_ports:
+      - "{{ psql.host.port }}:{{ psql.docker.port }}"
+    volumes:
+      - "{{ psql.docker.volume }}:{{ psql.docker.data }}"
+    env:
+      POSTGRES_USER: "{{ psql.db.user }}"
+      POSTGRES_PASSWORD: "{{ psql.db.password }}"
+      POSTGRES_DB: "{{ psql.db.name }}"

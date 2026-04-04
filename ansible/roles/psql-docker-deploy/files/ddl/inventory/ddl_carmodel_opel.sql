@@ -1,0 +1,2 @@
+insert into brand_model (name, variant, brand_id, fuel_id) values ('Corsa', '1.5 L DV5 BlueHDi I4', 4, 1);
+insert into brand_model (name, variant, brand_id, fuel_id) values ('Mokka', '1.5 L DV5 BlueHDi I4', 4, 1);

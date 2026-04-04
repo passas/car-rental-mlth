@@ -1,0 +1,12 @@
+---
+- name: PSQL PROCEDURE IMPORT
+  community.postgresql.postgresql_query:
+    login_host: "{{ ansible_host }}"
+    login_port: "{{ psql.host.port }}"
+    login_user: "{{ psql.db.user }}"
+    login_password: "{{ psql.db.password }}"
+    db: "{{ psql.db.name }}"
+    query: "{{ lookup('file', role_path + '/files/procedure/inventory/' + procedure) }}"
+  loop: "{{ psql.files.inventory.procedure }}"
+  loop_control:
+    loop_var: procedure

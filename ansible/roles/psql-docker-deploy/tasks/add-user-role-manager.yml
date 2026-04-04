@@ -1,0 +1,15 @@
+---
+- name: PSQL DDL - ADD USER MANAGER
+  community.postgresql.postgresql_query:
+    login_host: "{{ ansible_host }}"
+    login_port: "{{ psql.host.port }}"
+    login_user: "{{ psql.db.user }}"
+    login_password: "{{ psql.db.password }}"
+    db: "{{ psql.db.name }}"
+    query: "call sp_create_user_manager_role(%s, %s);"
+    positional_args:
+      - "{{ manager.username }}"
+      - "{{ manager.password }}"
+  loop: "{{ psql.user.manager }}"
+  loop_control:
+    loop_var: manager

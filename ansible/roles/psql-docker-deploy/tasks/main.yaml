@@ -1,0 +1,15 @@
+---
+- name: PostgreSQL - Docker - Volume
+  ansible.builtin.import_tasks: volume.yml
+
+- name: PostgreSQL - Docker - Container
+  ansible.builtin.import_tasks: container.yml
+
+- name: PostgreSQL - Docker - Ping
+  ansible.builtin.import_tasks: ping.yaml
+
+- name: PostgreSQL - User
+  ansible.builtin.import_tasks: user.yaml
+
+- name: PostgreSQL - Inventory
+  ansible.builtin.import_tasks: inventory.yaml

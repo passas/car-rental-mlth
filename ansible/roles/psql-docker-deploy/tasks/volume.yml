@@ -1,0 +1,3 @@
+---
+- name: PSQL DOCKER VOLUME CREATION
+  ansible.builtin.command: docker volume create {{ psql.docker.volume }}

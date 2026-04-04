@@ -1,0 +1,9 @@
+---
+- name: PSQL DOCKER PING CONTAINER
+  community.docker.docker_container_exec:
+    container: "{{ psql.docker.container }}"
+    command: pg_isready -U {{ psql.db.user }}
+  register: psql_ok
+  retries: 10
+  delay: 5
+  until: psql_ok.rc == 0
