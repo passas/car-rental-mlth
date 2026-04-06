@@ -6,15 +6,15 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.acme.api.rest.dto.UserDTO;
+import org.acme.api.rest.dto.user.UserDTO;
 import org.acme.app.model.user.UserModel;
 import org.acme.app.model.user.mapper.UserModelMapper;
 import org.acme.app.service.user.UserService;
 //import org.acme.app.service.exception.passwordservice.PasswordServicePasswordNotMatchException;
 import org.acme.app.service.user.exception.UserNotFoundException;
 import org.acme.app.service.user.exception.WrongCredentialsException;
-import org.acme.db.psql.repository.exception.UserRepositoryConstraintUsernameUniqueException;
-//import org.acme.db.psql.repository.exception.UserRepositoryUserNotFoundException;
+import org.acme.db.psql.repository.user.exception.UserRepositoryConstraintUsernameUniqueException;
+//import org.acme.db.psql.repository.user.exception.UserRepositoryUserNotFoundException;
 import org.jboss.logging.Logger;
 
 import java.util.LinkedHashMap;

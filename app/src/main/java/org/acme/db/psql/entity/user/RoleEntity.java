@@ -1,23 +1,13 @@
 package org.acme.db.psql.entity.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity(name = "role")
 public class RoleEntity
 {
     @Id
-    @Column(name="id")
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "role_id_sequence"
-    )
-    @SequenceGenerator(
-            name = "role_id_sequence",
-            sequenceName = "role_id_sequence",
-            allocationSize = 1
-    )
-    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_role_id")
+    @SequenceGenerator(name = "seq_role_id", allocationSize = 1)
     private Short id;
     private String name;
 

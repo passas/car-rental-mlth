@@ -9,27 +9,15 @@ import java.util.List;
 public class UserEntity
 {
     @Id
-    @Column(name="id")
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "_user_id_sequence"
-    )
-    @SequenceGenerator(
-            name = "_user_id_sequence",
-            sequenceName = "_user_id_sequence",
-            allocationSize = 1
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_user_id")
+    @SequenceGenerator(name = "seq_user_id", allocationSize = 1)
     private Long id;
     private String username;
     private String password;
     @Column(name="is_active")
     private Boolean active;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     public List<RoleEntity> roles;
 
     public UserEntity()

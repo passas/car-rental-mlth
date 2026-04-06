@@ -1,6 +1,6 @@
 package org.acme.app.model.car.mapper;
 
-import org.acme.api.rest.dto.FuelDTO;
+import org.acme.api.rest.dto.inventory.FuelDTO;
 import org.acme.app.model.car.FuelModel;
 import org.acme.db.psql.entity.car.FuelEntity;
 

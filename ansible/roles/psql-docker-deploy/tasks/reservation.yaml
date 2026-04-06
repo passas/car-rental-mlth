@@ -1,0 +1,4 @@
+---
+- name: PostgreSQL - Reservation - Schema
+  ansible.builtin.include_tasks: reservation/schema.yml
+  when: psql.files.reservation.schema is defined and psql.files.reservation.schema | length() > 0

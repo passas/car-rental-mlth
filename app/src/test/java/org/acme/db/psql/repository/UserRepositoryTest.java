@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import org.acme.app.service.user.PasswordService;
 import org.acme.db.psql.entity.user.RoleEntity;
 import org.acme.db.psql.entity.user.UserEntity;
+import org.acme.db.psql.repository.user.RoleRepository;
+import org.acme.db.psql.repository.user.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

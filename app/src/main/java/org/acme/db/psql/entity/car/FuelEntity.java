@@ -6,16 +6,8 @@ import jakarta.persistence.*;
 public class FuelEntity
 {
     @Id
-    @Column(name="id")
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "fuel_id_sequence"
-    )
-    @SequenceGenerator(
-            name = "fuel_id_sequence",
-            sequenceName = "fuel_id_sequence",
-            allocationSize = 1
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fuel_id")
+    @SequenceGenerator(name = "seq_fuel_id", allocationSize = 1)
     private Short id;
     private String name;
 

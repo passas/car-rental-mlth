@@ -6,29 +6,15 @@ import jakarta.persistence.*;
 public class BrandModelEntity
 {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "brand_model_id_sequence"
-    )
-    @SequenceGenerator(
-            name = "brand_model_id_sequence",
-            sequenceName = "brand_model_id_sequence",
-            allocationSize = 1
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_brand_model_id" )
+    @SequenceGenerator(name = "seq_brand_model_id", allocationSize = 1)
     private Integer id;
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "brand_id",
-            foreignKey = @ForeignKey(name = "brand_model_brand")
-    )
+    @JoinColumn(name = "brand_id", foreignKey = @ForeignKey(name = "fk_brand_model_brand_model_id"))
     private BrandEntity brandEntity;
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fuel_id",
-            foreignKey = @ForeignKey(name = "brand_model_fuel")
-    )
+    @JoinColumn(name = "fuel_id", foreignKey = @ForeignKey(name = "brand_model_fuel"))
     private FuelEntity fuelEntity;
-
     private String name;
     private String variant;
 

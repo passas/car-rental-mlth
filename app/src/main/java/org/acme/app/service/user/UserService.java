@@ -9,10 +9,10 @@ import org.acme.app.service.user.exception.UserNotFoundException;
 import org.acme.app.service.user.exception.WrongCredentialsException;
 import org.acme.db.psql.entity.user.RoleEntity;
 import org.acme.db.psql.entity.user.UserEntity;
-import org.acme.db.psql.repository.RoleRepository;
-import org.acme.db.psql.repository.UserRepository;
-import org.acme.db.psql.repository.exception.UserRepositoryConstraintUsernameUniqueException;
-//import org.acme.db.psql.repository.exception.user.UserRepositoryUserNotFoundException;
+import org.acme.db.psql.repository.user.RoleRepository;
+import org.acme.db.psql.repository.user.UserRepository;
+import org.acme.db.psql.repository.user.exception.UserRepositoryConstraintUsernameUniqueException;
+//import org.acme.db.psql.repository.user.exception.user.UserRepositoryUserNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.jboss.logging.Logger;
 

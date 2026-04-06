@@ -5,8 +5,8 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import jakarta.transaction.Transactional;
-import org.acme.api.rest.dto.UserDTO;
-import org.acme.db.psql.repository.UserRepository;
+import org.acme.api.rest.dto.user.UserDTO;
+import org.acme.db.psql.repository.user.UserRepository;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 

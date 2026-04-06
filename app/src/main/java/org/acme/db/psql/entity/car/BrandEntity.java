@@ -6,17 +6,9 @@ import jakarta.persistence.*;
 public class BrandEntity
 {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "brand_id_sequence"
-    )
-    @SequenceGenerator(
-            name = "brand_id_sequence",
-            sequenceName = "brand_id_sequence",
-            allocationSize = 1
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_brand_id")
+    @SequenceGenerator(name = "seq_brand_id", allocationSize = 1)
     private Short id;
-
     private String name;
 
     public BrandEntity()

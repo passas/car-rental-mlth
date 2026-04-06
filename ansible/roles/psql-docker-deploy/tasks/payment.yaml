@@ -1,0 +1,4 @@
+---
+- name: PostgreSQL - Payment - Schema
+  ansible.builtin.include_tasks: payment/schema.yml
+  when: psql.files.payment.schema is defined and psql.files.payment.schema | length() > 0

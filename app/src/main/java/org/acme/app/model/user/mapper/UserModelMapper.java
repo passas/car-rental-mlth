@@ -1,6 +1,6 @@
 package org.acme.app.model.user.mapper;
 
-import org.acme.api.rest.dto.UserDTO;
+import org.acme.api.rest.dto.user.UserDTO;
 import org.acme.app.model.user.UserModel;
 import org.acme.db.psql.entity.user.UserEntity;
 

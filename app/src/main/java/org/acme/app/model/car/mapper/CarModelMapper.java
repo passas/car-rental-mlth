@@ -1,6 +1,6 @@
 package org.acme.app.model.car.mapper;
 
-import org.acme.api.rest.dto.CarDTO;
+import org.acme.api.rest.dto.inventory.CarDTO;
 import org.acme.app.model.car.CarModel;
 import org.acme.db.psql.entity.car.CarEntity;
 

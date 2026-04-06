@@ -1,10 +1,9 @@
-create sequence brand_id_sequence start with 1 increment by 1;
-
+create sequence seq_brand_id start with 1 increment by 1;
 create table brand
 (
-    id smallint not null default nextval('brand_id_sequence'),
-    name varchar(48) not null,
+    id smallint not null default nextval('seq_brand_id'),
+    name varchar(64) not null,
     primary key (id),
-    constraint brand_name_unique unique (name),
-    constraint brand_name_not_blank check (trim(name) <> '')
+    constraint uq_brand_name unique (name),
+    constraint chk_name check (trim(name) <> '')
 );

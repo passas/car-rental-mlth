@@ -8,22 +8,12 @@ import java.math.BigDecimal;
 public class CarEntity
 {
     @Id
-    @Column(name="id")
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "car_id_sequence"
-    )
-    @SequenceGenerator(
-            name = "car_id_sequence",
-            sequenceName = "car_id_sequence",
-            allocationSize = 1
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_car_id")
+    @SequenceGenerator(name = "seq_car_id", allocationSize = 1)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "brand_model_id",
-            foreignKey = @ForeignKey(name = "car_brand_model")
-    )
+    @JoinColumn(name = "brand_model_id", foreignKey = @ForeignKey(name = "car_brand_model"))
     private BrandModelEntity brandModelEntity;
 
     @Column(name="license_plate", unique = true)

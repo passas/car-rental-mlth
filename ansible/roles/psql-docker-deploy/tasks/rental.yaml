@@ -1,0 +1,4 @@
+---
+- name: PostgreSQL - Rental - Schema
+  ansible.builtin.include_tasks: rental/schema.yml
+  when: psql.files.rental.schema is defined and psql.files.rental.schema | length() > 0

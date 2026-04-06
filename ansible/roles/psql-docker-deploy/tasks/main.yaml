@@ -13,3 +13,12 @@
 
 - name: PostgreSQL - Inventory
   ansible.builtin.import_tasks: inventory.yaml
+
+- name: PostgreSQL - Reservation
+  ansible.builtin.import_tasks: reservation.yaml
+
+- name: PostgreSQL - Rental
+  ansible.builtin.import_tasks: rental.yaml
+
+- name: PostgreSQL - Payment
+  ansible.builtin.import_tasks: payment.yaml

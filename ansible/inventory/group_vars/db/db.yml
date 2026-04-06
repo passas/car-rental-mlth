@@ -52,3 +52,12 @@ psql:
         - "ddl_carmodel_renault.sql"
         - "ddl_carmodel_volkswagen.sql"
         - "ddl_car.sql"
+    reservation:
+      schema:
+        - "reservation.sql"
+    rental:
+      schema:
+        - "rental.sql"
+    payment:
+      schema:
+        - "payment.sql"
