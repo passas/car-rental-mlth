@@ -56,7 +56,7 @@ public class ReservationService
     public ReservationModel createReservation(ReservationModel model) throws ReservationRepositoryConstraintUserForeignKeyException, ReservationRepositoryConstraintCarForeignKeyException, ReservationRepositoryConstraintPeriodOverlapExcludeException, ReservationRepositoryConstraintFromDateToDateCheckException
     {
         ReservationEntity entity = ReservationEntityMapper.fromModel(model);
-        this.log.infof("Creating a new reservation:\n %s", entity);
+        this.log.infof("Creating a new reservation: %s", entity);
         try
         {
             this.reservationRepository.persist(entity);
@@ -87,7 +87,7 @@ public class ReservationService
             }
         }
         ReservationModel saved = ReservationModelMapper.fromEntity(entity);
-        this.log.infof("Reservation created:\n %s", saved);
+        this.log.infof("Reservation created: %s", saved);
         return saved;
     }
 }

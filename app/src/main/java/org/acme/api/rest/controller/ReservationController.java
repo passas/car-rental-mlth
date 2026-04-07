@@ -2,10 +2,8 @@ package org.acme.api.rest.controller;
 
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.SecurityContext;
 import org.acme.api.rest.dto.inventory.CarDTO;
 import org.acme.api.rest.dto.inventory.mapper.CarDTOMapper;
 import org.acme.api.rest.dto.reservation.ReservationDTO;
@@ -53,18 +51,15 @@ public class ReservationController
             json.put("message", "'from' and 'to' query parameters must be present");
             data = json;
             status = Response.Status.BAD_REQUEST;
-        }
-        else
-        {
-            TreeSet<CarDTO> available = this.reservationService.checkAvailableCars(from, to).stream().map(CarDTOMapper::fromModel).collect(Collectors.toCollection(TreeSet::new));
-            data = available;
-            status = Response.Status.OK;
-        }
-        response = Response.ok(data, MediaType.APPLICATION_JSON).status(status).build();
-        if (status == Response.Status.OK)
-            this.log.infof("OUT /api/rest/reservation?from=%s&to=%s GET\n status = %d\n headers = %s\n data = (%d available cars)", from, to, response.getStatus(), response.getHeaders(), ((Set<CarDTO>)response.getEntity()).size());
-        else
+            response = Response.ok(data, MediaType.APPLICATION_JSON).status(status).build();
             this.log.infof("OUT /api/rest/reservation?from=%s&to=%s GET\n status = %d\n headers = %s\n data = %s", from, to, response.getStatus(), response.getHeaders(), response.getEntity());
+            return response;
+        }
+        TreeSet<CarDTO> available = this.reservationService.checkAvailableCars(from, to).stream().map(CarDTOMapper::fromModel).collect(Collectors.toCollection(TreeSet::new));
+        data = available;
+        status = Response.Status.OK;
+        response = Response.ok(data, MediaType.APPLICATION_JSON).status(status).build();
+        this.log.infof("OUT /api/rest/reservation?from=%s&to=%s GET\n status = %d\n headers = %s\n data = (%d available cars)", from, to, response.getStatus(), response.getHeaders(), ((Set<CarDTO>)response.getEntity()).size());
         return response;
     }
 

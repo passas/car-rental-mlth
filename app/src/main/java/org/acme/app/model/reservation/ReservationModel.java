@@ -7,16 +7,16 @@ public class ReservationModel
     private Long id;
     private Long userId;
     private Long carId;
-    private Instant dateFrom;
-    private Instant dateTo;
+    private Instant fromDate;
+    private Instant toDate;
 
     public ReservationModel()
     {
         this.id = null;
         this.userId = null;
         this.carId = null;
-        this.dateFrom = null;
-        this.dateTo = null;
+        this.fromDate = null;
+        this.toDate = null;
     }
 
     public void setId(Long id)
@@ -34,14 +34,14 @@ public class ReservationModel
         this.carId = carId;
     }
 
-    public void setDateFrom(Instant dateFrom)
+    public void setFromDate(Instant fromDate)
     {
-        this.dateFrom = dateFrom;
+        this.fromDate = fromDate;
     }
 
-    public void setDateTo(Instant dateTo)
+    public void setToDate(Instant toDate)
     {
-        this.dateTo = dateTo;
+        this.toDate = toDate;
     }
 
     public Long getId()
@@ -59,14 +59,14 @@ public class ReservationModel
         return this.carId;
     }
 
-    public Instant getDateFrom()
+    public Instant getFromDate()
     {
-        return this.dateFrom;
+        return this.fromDate;
     }
 
-    public Instant getDateTo()
+    public Instant getToDate()
     {
-        return this.dateTo;
+        return this.toDate;
     }
 
     @Override
@@ -77,8 +77,8 @@ public class ReservationModel
                 + "id: " + this.id
                 + ", userId: " + this.userId
                 + ", carId: " + this.carId
-                + ", dateFrom: " + this.dateFrom
-                + ", dateTo: " + this.dateTo
+                + ", fromDate: " + this.fromDate
+                + ", toDate: " + this.toDate
                 + "]";
     }
 }

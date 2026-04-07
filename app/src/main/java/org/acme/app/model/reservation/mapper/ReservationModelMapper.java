@@ -13,8 +13,8 @@ public class ReservationModelMapper
         model.setId(dto.getId());
         model.setCarId(dto.getCarId());
         model.setUserId(dto.getUserId());
-        model.setDateFrom(dto.getDateFrom());
-        model.setDateTo(dto.getDateTo());
+        model.setFromDate(dto.getFromDate());
+        model.setToDate(dto.getToDate());
         return model;
     }
 
@@ -24,8 +24,8 @@ public class ReservationModelMapper
         model.setId(entity.getId());
         model.setCarId(entity.getCarEntity().getId());
         model.setUserId(entity.getUserEntity().getId());
-        model.setDateFrom(entity.getDateFrom());
-        model.setDateTo(entity.getDateTo());
+        model.setFromDate(entity.getDateFrom());
+        model.setToDate(entity.getDateTo());
         return model;
     }
 }

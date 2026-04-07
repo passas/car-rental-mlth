@@ -15,13 +15,13 @@ public class RentalRepository implements PanacheRepositoryBase<RentalEntity, Lon
 
     public boolean isStarted(RentalEntity entity)
     {
-        long n = count("reservationId = ?1 and dateStart is not NULL", entity.getReservationEntity().getId());
+        long n = count("id = ?1 and startDate is not NULL", entity.getId());
         return n > 0;
     }
 
     public boolean isFinished(RentalEntity entity)
     {
-        long n = count("reservationId = ?1 and dateEnd is not NULL", entity.getReservationEntity().getId());
+        long n = count("id = ?1 and endDate is not NULL", entity.getId());
         return n > 0;
     }
 }

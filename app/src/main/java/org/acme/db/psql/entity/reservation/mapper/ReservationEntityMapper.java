@@ -18,8 +18,8 @@ public class ReservationEntityMapper
         UserEntity user = new UserEntity();
         user.setId(model.getUserId());
         entity.setUserEntity(user);
-        entity.setDateFrom(model.getDateFrom());
-        entity.setDateTo(model.getDateTo());
+        entity.setDateFrom(model.getFromDate());
+        entity.setDateTo(model.getToDate());
         return entity;
     }
 }

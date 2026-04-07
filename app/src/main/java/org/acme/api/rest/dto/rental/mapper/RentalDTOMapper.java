@@ -10,8 +10,8 @@ public class RentalDTOMapper
         RentalDTO dto = new RentalDTO();
         dto.setId(model.getId());
         dto.setReservationId(model.getReservationId());
-        dto.setDateStart(model.getDateStart());
-        dto.setDateEnd(model.getDateEnd());
+        dto.setStartDate(model.getStartDate());
+        dto.setEndDate(model.getEndDate());
         dto.setAmount(model.getAmount());
         return dto;
     }

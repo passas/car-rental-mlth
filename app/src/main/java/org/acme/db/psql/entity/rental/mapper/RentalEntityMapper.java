@@ -14,8 +14,8 @@ public class RentalEntityMapper
         ReservationEntity reservationEntity = new ReservationEntity();
         reservationEntity.setId(model.getReservationId());
         entity.setReservationEntity(reservationEntity);
-        entity.setStartDate(model.getDateStart());
-        entity.setEndDate(model.getDateEnd());
+        entity.setStartDate(model.getStartDate());
+        entity.setEndDate(model.getEndDate());
         entity.setAmount(model.getAmount());
         return entity;
     }

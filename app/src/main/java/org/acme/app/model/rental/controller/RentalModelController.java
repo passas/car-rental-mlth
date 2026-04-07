@@ -2,18 +2,22 @@ package org.acme.app.model.rental.controller;
 
 import org.acme.app.model.rental.RentalModel;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
 public class RentalModelController
 {
-    public static void startRental(RentalModel rental, Instant startDate)
+    public static void startRental(RentalModel rental)
     {
         rental.setId(null);
         rental.setReservationId(rental.getReservationId());
-        rental.setDateStart(startDate);
-        rental.setDateEnd(null);
+        rental.setStartDate(rental.getStartDate());
+        rental.setEndDate(null);
+        rental.setAmount(null);
+    }
+    public static void endRental(RentalModel rental)
+    {
+        rental.setId(rental.getId());
+        rental.setReservationId(rental.getReservationId());
+        rental.setStartDate(null);
+        rental.setEndDate(rental.getEndDate());
         rental.setAmount(null);
     }
 }

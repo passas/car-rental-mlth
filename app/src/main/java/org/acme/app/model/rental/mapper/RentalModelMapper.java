@@ -12,8 +12,8 @@ public class RentalModelMapper
         RentalModel model = new RentalModel();
         model.setId(dto.getId());
         model.setReservationId(dto.getReservationId());
-        model.setDateStart(dto.getDateStart());
-        model.setDateEnd(dto.getDateEnd());
+        model.setStartDate(dto.getStartDate());
+        model.setEndDate(dto.getEndDate());
         model.setAmount(dto.getAmount());
         return model;
     }
@@ -23,8 +23,8 @@ public class RentalModelMapper
         RentalModel model = new RentalModel();
         model.setId(entity.getId());
         model.setReservationId(entity.getReservationEntity().getId());
-        model.setDateStart(entity.getStartDate());
-        model.setDateEnd(entity.getEndDate());
+        model.setStartDate(entity.getStartDate());
+        model.setEndDate(entity.getEndDate());
         model.setAmount(entity.getAmount());
         return model;
     }

@@ -7,16 +7,16 @@ public class RentalModel
 {
     private Long id;
     private Long reservationId;
-    private Instant dateStart;
-    private Instant dateEnd;
+    private Instant startDate;
+    private Instant endDate;
     private BigDecimal amount;
 
     public RentalModel()
     {
         this.id = null;
         this.reservationId = null;
-        this.dateStart = null;
-        this.dateEnd = null;
+        this.startDate = null;
+        this.endDate = null;
         this.amount = null;
     }
 
@@ -35,14 +35,14 @@ public class RentalModel
         this.amount = amount;
     }
 
-    public void setDateStart(Instant dateStart)
+    public void setStartDate(Instant startDate)
     {
-        this.dateStart = dateStart;
+        this.startDate = startDate;
     }
 
-    public void setDateEnd(Instant dateEnd)
+    public void setEndDate(Instant endDate)
     {
-        this.dateEnd = dateEnd;
+        this.endDate = endDate;
     }
 
     public Long getId()
@@ -60,14 +60,14 @@ public class RentalModel
         return this.amount;
     }
 
-    public Instant getDateStart()
+    public Instant getStartDate()
     {
-        return this.dateStart;
+        return this.startDate;
     }
 
-    public Instant getDateEnd()
+    public Instant getEndDate()
     {
-        return this.dateEnd;
+        return this.endDate;
     }
 
     @Override
@@ -78,8 +78,8 @@ public class RentalModel
                 + "id: " + this.id
                 + ", reservationId: " + this.reservationId
                 + ", amount: " + this.amount
-                + ", dateStart: " + this.dateStart
-                + ", dateEnd: " + this.dateEnd
+                + ", startDate: " + this.startDate
+                + ", endDate: " + this.endDate
                 + "]";
     }
 }

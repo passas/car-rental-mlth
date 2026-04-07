@@ -9,7 +9,7 @@ public class ReservationModelController
         reservation.setId(null);
         reservation.setUserId(reservation.getUserId());
         reservation.setCarId(reservation.getCarId());
-        reservation.setDateFrom(reservation.getDateFrom());
-        reservation.setDateTo(reservation.getDateTo());
+        reservation.setFromDate(reservation.getFromDate());
+        reservation.setToDate(reservation.getToDate());
     }
 }

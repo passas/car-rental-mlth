@@ -1,35 +1,20 @@
-package org.acme.db.psql.entity.payment;
-
-import jakarta.persistence.*;
-import org.acme.db.psql.entity.rental.RentalEntity;
+package org.acme.app.model.payment;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 
-@Entity(name="payment")
-public class PaymentEntity
+public class PaymentModel
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_payment_id")
-    @SequenceGenerator(name = "seq_payment_id", allocationSize = 1)
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rental_id")
-    private RentalEntity rentalEntity;
-
+    private Long rentalId;
     private BigDecimal amount;
-
-    @Column(name = "created_at")
     private Instant createdAt;
-
-    @Column(name = "payed_at")
     private Instant payedAt;
 
-    public PaymentEntity()
+    public PaymentModel()
     {
         this.id = null;
-        this.rentalEntity = null;
+        this.rentalId = null;
         this.amount = null;
         this.createdAt = null;
         this.payedAt = null;
@@ -40,9 +25,9 @@ public class PaymentEntity
         this.id = id;
     }
 
-    public void setRentalEntity(RentalEntity rentalEntity)
+    public void setRentalId(Long rentalId)
     {
-        this.rentalEntity = rentalEntity;
+        this.rentalId = rentalId;
     }
 
     public void setAmount(BigDecimal amount)
@@ -65,9 +50,9 @@ public class PaymentEntity
         return this.id;
     }
 
-    public RentalEntity getRentalEntity()
+    public Long getRentalId()
     {
-        return this.rentalEntity;
+        return this.rentalId;
     }
 
     public BigDecimal getAmount()
@@ -89,13 +74,12 @@ public class PaymentEntity
     public String toString()
     {
         return this.getClass().getSimpleName()
-                + "["
-                + "id: " + this.id
-                + ", rentalEntity: " + this.rentalEntity
-                + ", amount: " + this.amount
-                + ", createdAt: " + this.createdAt
-                + ", payedAt: " + this.payedAt
-                + "]";
+            + "["
+            + "id: " + this.id
+            + "rentalId: " + this.rentalId
+            + "amount: " + this.amount
+            + "createdAt: " + this.createdAt
+            + "payedAt: " + this.payedAt
+            + "]";
     }
-
 }

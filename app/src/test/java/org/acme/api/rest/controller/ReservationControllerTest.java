@@ -6,9 +6,7 @@ import io.restassured.RestAssured;
 import jakarta.transaction.Transactional;
 import org.acme.api.rest.dto.inventory.CarDTO;
 import org.acme.api.rest.dto.reservation.ReservationDTO;
-import org.acme.db.psql.entity.reservation.mapper.ReservationEntityMapper;
 import org.acme.db.psql.repository.reservation.ReservationRepository;
-import org.acme.db.psql.repository.user.UserRepository;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
@@ -60,8 +58,8 @@ public class ReservationControllerTest
         ReservationDTO dto = new ReservationDTO();
         dto.setCarId(1L);
         dto.setUserId(1L);
-        dto.setDateTo(Instant.now().plus(1, ChronoUnit.DAYS));
-        dto.setDateFrom(Instant.now());
+        dto.setToDate(Instant.now().plus(1, ChronoUnit.DAYS));
+        dto.setFromDate(Instant.now());
 
         dto = RestAssured.given()
                 .contentType("application/json")
