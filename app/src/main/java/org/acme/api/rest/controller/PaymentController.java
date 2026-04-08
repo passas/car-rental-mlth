@@ -23,6 +23,7 @@ public class PaymentController
         this.paymentService = paymentService;
     }
 
+    @Path("/pay")
     @POST
     @RolesAllowed({"admin", "manager", "system"})
     public Response pay(PaymentDTO paymentDTO)
