@@ -51,4 +51,10 @@ public class PaymentService
         this.log.infof("Payment due created: %s", paymentEntity);
         return PaymentModelMapper.fromEntity(paymentEntity);
     }
+
+    @Transactional
+    public PaymentModel payPayment(PaymentModel paymentModel)
+    {
+        return paymentModel;
+    }
 }
