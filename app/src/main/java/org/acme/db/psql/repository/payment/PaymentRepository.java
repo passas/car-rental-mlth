@@ -9,13 +9,13 @@ public class PaymentRepository implements PanacheRepositoryBase<PaymentEntity, L
 {
     public boolean isOpened(PaymentEntity entity)
     {
-        long n = count("id = ?1 and dateCreation is not NULL", entity.getId());
+        long n = count("id = ?1 and createdAt is not NULL", entity.getId());
         return n > 0;
     }
 
     public boolean isPayed(PaymentEntity entity)
     {
-        long n = count("id = ?1 and datePay is not NULL", entity.getId());
+        long n = count("id = ?1 and payedAt is not NULL", entity.getId());
         return n > 0;
     }
 }

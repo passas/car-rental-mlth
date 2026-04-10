@@ -11,6 +11,8 @@ import org.acme.app.model.payment.PaymentModel;
 import org.acme.app.model.payment.controller.PaymentModelController;
 import org.acme.app.model.payment.mapper.PaymentModelMapper;
 import org.acme.app.service.payment.PaymentService;
+import org.acme.bus.kafka.event.PaymentEvent;
+import org.acme.bus.kafka.producer.PaymentEventProducer;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.Logger;
 
@@ -25,12 +27,14 @@ public class PaymentController
     private Logger log;
     private JsonWebToken jasonWebToken;
     private PaymentService paymentService;
+    private PaymentEventProducer paymentEventProducer;
 
-    public PaymentController(JsonWebToken jsonWebToken, PaymentService paymentService)
+    public PaymentController(JsonWebToken jsonWebToken, PaymentService paymentService, PaymentEventProducer paymentEventProducer)
     {
         this.log = Logger.getLogger(PaymentController.class.getSimpleName());
         this.jasonWebToken = jsonWebToken;
         this.paymentService = paymentService;
+        this.paymentEventProducer = paymentEventProducer;
     }
 
     @Path("/pay")
@@ -57,9 +61,15 @@ public class PaymentController
                 paymentModel.setPayedAt(Instant.from(LocalDateTime.now().atZone(ZoneId.of("UTC"))));
                 PaymentModelController.closePayment(paymentModel);
                 paymentModel = this.paymentService.payPayment(paymentModel);
-                // Pousar evento no Kafka
                 status = Response.Status.OK;
                 data = PaymentDTOMapper.fromModel(paymentModel);
+
+                PaymentEvent paymentEvent = new PaymentEvent();
+                paymentEvent.setPaymentId(paymentModel.getId());
+                paymentEvent.setRentalId(paymentModel.getRentalId());
+                paymentEvent.setAmount(paymentModel.getAmount());
+                paymentEvent.setDate(paymentModel.getPayedAt());
+                this.paymentEventProducer.send(paymentEvent);
             }
             catch (Exception e)
             {

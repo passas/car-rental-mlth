@@ -62,7 +62,7 @@ public class PaymentService
     public boolean isPaymentDueClosed(PaymentModel model)
     {
         PaymentEntity entity = PaymentEntityMapper.fromModel(model);
-        return this.paymentRepository.isOpened(entity) && !this.paymentRepository.isPayed(entity);
+        return this.paymentRepository.isOpened(entity) && this.paymentRepository.isPayed(entity);
     }
 
     @Transactional
@@ -70,7 +70,7 @@ public class PaymentService
     {
         PaymentEntity paymentEntity = this.paymentRepository.findById(paymentModel.getId());
         paymentEntity.setPayedAt(paymentModel.getPayedAt());
-        this.log.infof("Ending a payment due: %s", paymentEntity);
+        this.log.infof("Ending a payment due:\n %s", paymentEntity);
         try
         {
             this.paymentRepository.flush();
@@ -81,7 +81,7 @@ public class PaymentService
             if ("_".equals(constraintName))
                 this.log.error(e);
         }
-        this.log.infof("Payment due ended: %s", paymentEntity);
+        this.log.infof("Payment due ended:\n %s", paymentEntity);
         return PaymentModelMapper.fromEntity(paymentEntity);
     }
 }
