@@ -12,4 +12,13 @@ public class PaymentModelController
         payment.setCreatedAt(payment.getCreatedAt());
         payment.setPayedAt(null);
     }
+
+    public static void closePayment(PaymentModel payment)
+    {
+        payment.setId(payment.getId());
+        payment.setRentalId(payment.getRentalId());
+        payment.setAmount(null);
+        payment.setCreatedAt(null);
+        payment.setPayedAt(payment.getPayedAt());
+    }
 }

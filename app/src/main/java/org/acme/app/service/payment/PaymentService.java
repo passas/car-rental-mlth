@@ -4,8 +4,12 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import org.acme.app.model.payment.PaymentModel;
 import org.acme.app.model.payment.mapper.PaymentModelMapper;
+import org.acme.app.model.rental.RentalModel;
+import org.acme.app.model.rental.mapper.RentalModelMapper;
 import org.acme.db.psql.entity.payment.PaymentEntity;
 import org.acme.db.psql.entity.payment.mapper.PaymentEntityMapper;
+import org.acme.db.psql.entity.rental.RentalEntity;
+import org.acme.db.psql.entity.rental.mapper.RentalEntityMapper;
 import org.acme.db.psql.repository.payment.PaymentRepository;
 import org.acme.db.psql.repository.payment.exception.PaymentRepositoryConstraintRentalForeignKeyException;
 import org.acme.db.psql.repository.payment.exception.PaymentRepositoryConstraintRentalUniqueException;
@@ -53,8 +57,35 @@ public class PaymentService
     }
 
     @Transactional
+    public boolean isPaymentDueOpened(PaymentModel model)
+    {
+        return this.paymentRepository.isOpened(PaymentEntityMapper.fromModel(model));
+    }
+
+    @Transactional
+    public boolean isPaymentDueClosed(PaymentModel model)
+    {
+        PaymentEntity entity = PaymentEntityMapper.fromModel(model);
+        return this.paymentRepository.isOpened(entity) && !this.paymentRepository.isPayed(entity);
+    }
+
+    @Transactional
     public PaymentModel payPayment(PaymentModel paymentModel)
     {
-        return paymentModel;
+        PaymentEntity paymentEntity = this.paymentRepository.findById(paymentModel.getId());
+        paymentEntity.setPayedAt(paymentModel.getPayedAt());
+        this.log.infof("Ending a payment due: %s", paymentEntity);
+        try
+        {
+            this.paymentRepository.flush();
+        }
+        catch (ConstraintViolationException e)
+        {
+            String constraintName = e.getConstraintName();
+            if ("_".equals(constraintName))
+                this.log.error(e);
+        }
+        this.log.infof("Payment due ended: %s", paymentEntity);
+        return PaymentModelMapper.fromEntity(paymentEntity);
     }
 }

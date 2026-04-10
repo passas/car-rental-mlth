@@ -7,7 +7,7 @@ import org.acme.db.psql.entity.payment.PaymentEntity;
 @ApplicationScoped
 public class PaymentRepository implements PanacheRepositoryBase<PaymentEntity, Long>
 {
-    public boolean isCreated(PaymentEntity entity)
+    public boolean isOpened(PaymentEntity entity)
     {
         long n = count("id = ?1 and dateCreation is not NULL", entity.getId());
         return n > 0;
