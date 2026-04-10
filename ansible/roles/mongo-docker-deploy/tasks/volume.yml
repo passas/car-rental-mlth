@@ -1,0 +1,9 @@
+---
+- name: MONGODB DOCKER CONFIGDB VOLUME CREATION
+  ansible.builtin.command: docker volume create {{ mongo.docker['volume-configdb'] }}
+
+- name: MONGODB DOCKER DB VOLUME CREATION
+  ansible.builtin.command: docker volume create {{ mongo.docker['volume-db'] }}
+
+- name: MONGODB DOCKER MIGRATION VOLUME CREATION
+  ansible.builtin.command: docker volume create {{ mongo.docker['volume-migration'] }}

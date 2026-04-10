@@ -1,0 +1,33 @@
+---
+- name: MONGODB DOCKER WAIT READY CONTAINER
+  community.docker.docker_container_exec:
+    container: "{{ mongo.docker.container }}"
+    command: >
+      mongosh --eval "db.adminCommand('ping')"
+  register: mongo_ready
+  retries: 17
+  delay: 5
+  until: mongo_ready.rc == 0
+
+- name: MONGODB COLLECTION IMPORT - I
+  community.docker.docker_container_exec:
+    container: "{{ mongo.docker.container }}"
+    command: >
+      mkdir -p /opt/collection
+
+- name: MONGODB COLLECTION IMPORT - II
+  community.docker.docker_container_copy_into:
+    container: "{{ mongo.docker.container }}"
+    path: "{{ role_path }}/files/collection/{{ collection }}"
+    container_path: "/opt/collection/{{ collection }}"
+  loop: "{{ mongo.files.collection }}"
+  loop_control:
+    loop_var: collection
+
+- name: MONGODB COLLECTION IMPORT - III
+  community.docker.docker_container_exec:
+    container: "{{ mongo.docker.container }}"
+    command: "mongosh /opt/collection/{{ collection }}"
+  loop: "{{ mongo.files.collection }}"
+  loop_control:
+    loop_var: collection

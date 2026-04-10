@@ -1,0 +1,37 @@
+---
+- name: Extract bootstrap server from KAFKA_ADVERTISED_LISTENERS
+  set_fact:
+    #bootstrap_server: "{{ kafka.KAFKA_ADVERTISED_LISTENERS.split('://')[1] }}"
+    BOOTSTRAP_SERVER: "{{ kafka.docker.env.KAFKA_ADVERTISED_LISTENERS | regex_search('PLAINTEXT://([^,]+)', '\\1') }}"
+
+- name: DBG
+  ansible.builtin.debug:
+    msg: The var is {{ BOOTSTRAP_SERVER }} haha not {{ BOOTSTRAP_SERVER[0] }}
+
+- name: KAFKA DOCKER WAIT READY CONTAINER
+  community.docker.docker_container_exec:
+    container: "{{ kafka.docker.container }}"
+    command: >
+      /opt/kafka/bin/kafka-topics.sh
+      --bootstrap-server {{ BOOTSTRAP_SERVER[0] | string }}
+      --list
+  register: kafka_existing_topics
+  retries: 19
+  delay: 5
+  until: kafka_existing_topics.rc == 0
+
+- name: KAFKA TOPIC
+  community.docker.docker_container_exec:
+    container: "{{ kafka.docker.container }}"
+    command: >
+      /opt/kafka/bin/kafka-topics.sh
+      --create
+      --topic {{ topic.name | string }}
+      --bootstrap-server {{ topic['bootstrap-server'] | string }}
+      --partitions {{ topic.partitions }}
+      --replication-factor {{ topic['replication-factor'] }}
+  loop: "{{ kafka.topic }}"
+  loop_control:
+    loop_var: topic
+  when: kafka_existing_topics.rc == 0 and topic.name not in kafka_existing_topics.stdout_lines
+  ignore_errors: yes

@@ -1,0 +1,5 @@
+---
+- name: HAProxy - Deploy
+  hosts: haproxy
+  roles:
+    - haproxy-deploy

@@ -1,0 +1,5 @@
+---
+- name: MongoDB - Docker - Deploy
+  hosts: mongodb
+  roles:
+    - mongo-docker-deploy

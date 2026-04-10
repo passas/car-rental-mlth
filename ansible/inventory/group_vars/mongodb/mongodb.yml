@@ -1,0 +1,14 @@
+mongo:
+  host:
+    port: 27017
+  docker:
+    container: "car-rental-mongo-container"
+    image: "mongo:8.2-rc"
+    volume-migration: "car-rental-mongo-migration-volume"
+    volume-configdb: "car-rental-mongo-configdb-volume"
+    volume-db: "car-rental-mongo-volume"
+    port: 27017
+  files:
+    collection:
+      - "notification.js"
+      - "contact.js"

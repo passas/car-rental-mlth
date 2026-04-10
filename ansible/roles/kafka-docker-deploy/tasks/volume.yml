@@ -1,0 +1,9 @@
+---
+- name: KAFKA DOCKER DATA VOLUME CREATION
+  ansible.builtin.command: docker volume create {{ kafka.docker['data-volume'] }}
+
+- name: KAFKA DOCKER CONFIG VOLUME CREATION
+  ansible.builtin.command: docker volume create {{ kafka.docker['config-volume'] }}
+
+- name: KAFKA DOCKER SECRETS VOLUME CREATION
+  ansible.builtin.command: docker volume create {{ kafka.docker['secrets-volume'] }}

@@ -1,0 +1,10 @@
+---
+- name: Kafka - Docker - Volume
+  ansible.builtin.import_tasks: volume.yml
+
+- name: Kafka - Docker - Container
+  ansible.builtin.import_tasks: container.yml
+
+- name: Kafka - Docker - Topic
+  ansible.builtin.include_tasks: topic.yml
+  when: kafka.topic is defined and kafka.topic | length > 0

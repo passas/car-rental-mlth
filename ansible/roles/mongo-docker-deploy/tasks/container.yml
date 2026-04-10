@@ -1,0 +1,13 @@
+---
+- name: MONGODB DOCKER CONTAINER
+  community.docker.docker_container:
+    name: "{{ mongo.docker.container }}"
+    image: "{{ mongo.docker.image }}"
+    state: started
+    restart_policy: unless-stopped
+    published_ports:
+      - "{{ mongo.host.port }}:{{ mongo.docker.port }}"
+    volumes:
+      - "{{ mongo.docker['volume-configdb'] }}:/data/configdb"
+      - "{{ mongo.docker['volume-db'] }}:/data/db"
+      - "{{ mongo.docker['volume-migration'] }}:/opt/collection"

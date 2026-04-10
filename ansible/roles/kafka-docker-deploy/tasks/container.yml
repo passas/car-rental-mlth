@@ -1,0 +1,24 @@
+---
+- name: PSQL DOCKER CONTAINER
+  community.docker.docker_container:
+    name: "{{ kafka.docker.container }}"
+    image: "{{ kafka.docker.image }}"
+    state: started
+    restart_policy: unless-stopped
+    published_ports:
+      - "{{ kafka.host.port }}:{{ kafka.docker.port }}"
+    volumes:
+      - "{{ kafka.docker['data-volume'] }}:{{ kafka.docker.data }}"
+      - "{{ kafka.docker['config-volume'] }}:/mnt/shared/config"
+      - "{{ kafka.docker['secrets-volume'] }}:/etc/kafka/secrets"
+    env:
+      KAFKA_NODE_ID: "{{ kafka.docker.env.KAFKA_NODE_ID | string }}"
+      KAFKA_PROCESS_ROLES: "{{ kafka.docker.env.KAFKA_PROCESS_ROLES | string }}"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "{{ kafka.docker.env.KAFKA_CONTROLLER_QUORUM_VOTERS | string }}"
+      KAFKA_LISTENERS: "{{ kafka.docker.env.KAFKA_LISTENERS | string }}"
+      KAFKA_ADVERTISED_LISTENERS: "{{ kafka.docker.env.KAFKA_ADVERTISED_LISTENERS | string }}"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "{{ kafka.docker.env.KAFKA_CONTROLLER_LISTENER_NAMES | string }}"
+      KAFKA_LOG_DIRS: "{{ kafka.docker.env.KAFKA_LOG_DIRS | string }}"
+      KAFKA_NUM_PARTITIONS: "{{ kafka.docker.env.KAFKA_NUM_PARTITIONS | string }}"
+      KAFKA_DEFAULT_REPLICATION_FACTOR: "{{ kafka.docker.env.KAFKA_DEFAULT_REPLICATION_FACTOR | string }}"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "{{ kafka.docker.env.KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR | string}}"

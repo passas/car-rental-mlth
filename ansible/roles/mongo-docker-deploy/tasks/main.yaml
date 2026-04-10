@@ -1,0 +1,14 @@
+---
+- name: MongoDB - Docker - Volume
+  ansible.builtin.import_tasks: volume.yml
+
+- name: MongoDB - Docker - Container
+  ansible.builtin.import_tasks: container.yml
+
+- name: MongoDB - Collection
+  ansible.builtin.include_tasks: collection.yml
+  when: mongo.files.collection is defined and mongo.files.collection | length() > 0
+
+- name: MongoDB - Document
+  ansible.builtin.include_tasks: document.yml
+  when: mongo.files.document is defined and mongo.files.document | length() > 0

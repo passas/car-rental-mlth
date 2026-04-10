@@ -1,0 +1,5 @@
+---
+- name: Kafka - Docker - Deploy
+  hosts: kafka
+  roles:
+    - kafka-docker-deploy
