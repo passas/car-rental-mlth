@@ -48,6 +48,11 @@ public class PaymentEvent
         return this.rentalId;
     }
 
+    public BigDecimal getAmount()
+    {
+        return this.amount;
+    }
+
     public Instant getDate()
     {
         return this.date;
