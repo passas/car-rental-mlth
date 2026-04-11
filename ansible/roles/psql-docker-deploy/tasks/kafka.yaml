@@ -1,0 +1,4 @@
+---
+- name: PostgreSQL - Kafka - Schemas
+  ansible.builtin.include_tasks: kafka/schema.yml
+  when: psql.files.kafka.schema is defined and psql.files.kafka.schema | length() > 0

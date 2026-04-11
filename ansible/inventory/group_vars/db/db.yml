@@ -61,3 +61,6 @@ psql:
     payment:
       schema:
         - "payment.sql"
+    kafka:
+      schema:
+        - "payment_dlq.sql"

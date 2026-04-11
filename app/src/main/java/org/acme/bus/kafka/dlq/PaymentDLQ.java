@@ -27,6 +27,7 @@ public class PaymentDLQ
     @Transactional
     public void enqueue(PaymentEvent paymentEvent)
     {
+        this.log.infof("Enqueuing payment event...\n %s", paymentEvent);
         PaymentEntity paymentEntity = this.paymentRepository.findById(paymentEvent.getPaymentId());
         PaymentDLQEntity paymentDLQEntity = new PaymentDLQEntity();
         paymentDLQEntity.setPaymentEntity(paymentEntity);
@@ -43,5 +44,6 @@ public class PaymentDLQ
         {
             this.log.error("DLQ persist failed", e);
         }
+        this.log.infof("Payment event enqueued:\n %s", paymentEntity);
     }
 }
